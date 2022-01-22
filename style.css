@@ -34,3 +34,7 @@
 .tile{
     background-color: rgba(0,0,0,0)
 }
+
+.movable{
+    background-color: #ff5457;
+}

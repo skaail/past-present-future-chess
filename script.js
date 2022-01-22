@@ -54,33 +54,61 @@ document.addEventListener('DOMContentLoaded', ()=>{
     isSelected = false
     var pos1 = 0
     let pos2 = 15
+    let player = 'p1'
 
 
     function clickedPast(){
         id = this.id.split(' ')
-        console.log(id[0], pos1)
         if(isSelected){
-            if(id[0] +1 == pos1||id[0] -1 == pos1||id[0] +4 == pos1||id[0] -4 == pos1){
+            if(this.classList.contains('movable')){
                 for(i=0;i<15;i++){
-                    pastSquares[i].classList.remove("p1");
-                    pastSquares[i].classList.add("tile");
+                    pastSquares[i].classList.remove(player)
+                    pastSquares[i].classList.remove("movable")
+                    pastSquares[i].classList.add("tile")
                 }
-                this.classList.add('p1')
+                this.classList.add(player)
                 this.classList.remove('tile')
                 pos1 = id[0]
-                isSelected = false  
-                console.log(isSelected)
             }
-            
+            isSelected = false  
+            for(i=0;i<15;i++){
+                pastSquares[i].classList.remove("movable")
+            }
         }else{
+            isSelected = true
             if(id[0] == pos1){
-                isSelected = true
-                console.log(isSelected)
+                    try {
+                        pastSquares[parseInt(id[0])+1].classList.add('movable')
+                    } catch (error) {}
+                    try {
+                        pastSquares[parseInt(id[0])-1].classList.add('movable')
+                    } catch (error) {}
+        
+                    try {
+                        pastSquares[parseInt(id[0])+4].classList.add('movable')
+                    } catch (error) {}
+        
+                    try {
+                        pastSquares[parseInt(id[0])-4].classList.add('movable')
+                    } catch (error) {}
+
+                }else if(id[0] == pos2){
+                    try {
+                        pastSquares[parseInt(id[0])+1].classList.add('movable')
+                    } catch (error) {}
+                    try {
+                        pastSquares[parseInt(id[0])-1].classList.add('movable')
+                    } catch (error) {}
+
+                    try {
+                        pastSquares[parseInt(id[0])+4].classList.add('movable')
+                    } catch (error) {}
+
+                    try {
+                        pastSquares[parseInt(id[0])-4].classList.add('movable')
+                    } catch (error) {}
             }
-
         }
-
-
     }
     function clickedPresent(){}
     function clickedFuture(){}

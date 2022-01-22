@@ -22,3 +22,15 @@
     justify-content: center;
     margin-top: 25px;
 }
+
+.p1{
+    background-color: rgba(90, 34, 230);
+}
+
+.p2{
+    background-color: rgba(44, 184, 112);
+}
+
+.tile{
+    background-color: rgba(0,0,0,0)
+}

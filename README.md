@@ -1,2 +1,5 @@
 # past-present-future-chess
-asdf
+
+Este projeto é uma reciração em js do jogo "That time you killed me"
+
+Regras:

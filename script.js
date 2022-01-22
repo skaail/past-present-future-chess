@@ -51,14 +51,18 @@ document.addEventListener('DOMContentLoaded', ()=>{
     createBoard('present')
     createBoard('future')
 
-    pastSquares.forEach(square => square.addEventListener('click', clicked))
-    presentSquares.forEach(square => square.addEventListener('click', clicked))
-    futureSquares.forEach(square => square.addEventListener('click', clicked))
+    pastSquares.forEach(square => square.addEventListener('click', clickedPast))
+    presentSquares.forEach(square => square.addEventListener('click', clickedPresent))
+    futureSquares.forEach(square => square.addEventListener('click', clickedFuture))
 
     let isSelected = false
     let last
     let move = false
-    function clicked(){
+    let turn = false
+    let color
+    let player
+ 
+    function clickedPast(){
         let info = this.id.split(' ')
 
         if(this.classList.contains('p1')||this.classList.contains('p2')){
@@ -122,7 +126,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
                         pastSquares[parseInt(info[0]) + 1].style.backgroundColor = 'rgba(255,255,255,0)'
                         pastSquares[parseInt(info[0]) + 1].classList.remove("movable");
                         pastSquares[parseInt(info[0]) + 1].classList.remove("right");
-                    } catch (error) {}""
+                    } catch (error) {}
                     try {
                         pastSquares[parseInt(info[0]) + 4].style.backgroundColor = 'rgba(255,255,255,0)'
                         pastSquares[parseInt(info[0]) + 4].classList.remove("movable");
@@ -134,17 +138,155 @@ document.addEventListener('DOMContentLoaded', ()=>{
             }
         }
         if(move && this.classList.contains('movable')){
-            pastSquares[parseInt(info[0])].style.backgroundColor = 'rgba(44, 184, 112)'
-            pastSquares[parseInt(info[0])].classList.add("p2");
-            pastSquares[parseInt(info[0])].classList.remove("movable");
-            pastSquares[parseInt(info[0])].classList.remove("up");
+            
+            try {
+                if(pastSquares[parseInt(info[0]) + 3].classList.contains('p2')){
+
+                }else{
+                    pastSquares[parseInt(info[0]) + 3].style.backgroundColor = 'rgba(255,255,255,0)'
+                    pastSquares[parseInt(info[0]) + 3].classList.remove("movable");
+                    pastSquares[parseInt(info[0]) + 3].classList.remove("left");
+                }
+ 
+
+            } catch (error) {}
+            try {
+                if(pastSquares[parseInt(info[0])].classList.contains('p2')){}
+                else{
+                    pastSquares[parseInt(info[0])].classList.remove("movable");
+                    pastSquares[parseInt(info[0])].classList.remove("up");
+                }
+
+            } catch (error) {}
+            try {
+                pastSquares[parseInt(info[0]) + 5].style.backgroundColor = 'rgba(255,255,255,0)'
+                pastSquares[parseInt(info[0]) + 5].classList.remove("movable");
+                pastSquares[parseInt(info[0]) + 5].classList.remove("right");
+            } catch (error) {}
+            try {
+                pastSquares[parseInt(info[0]) + 8].style.backgroundColor = 'rgba(255,255,255,0)'
+                pastSquares[parseInt(info[0]) + 8].classList.remove("movable");
+                pastSquares[parseInt(info[0]) + 8].classList.remove("down");
+            } catch (error) {}
+
+
+            try {
+                pastSquares[parseInt(info[0])].style.backgroundColor = 'rgba(255,255,255,0)'
+                pastSquares[parseInt(info[0])].classList.remove("movable");
+                pastSquares[parseInt(info[0])].classList.remove("left");
+            } catch (error) {}
+            try {
+                pastSquares[parseInt(info[0]) - 3].style.backgroundColor = 'rgba(255,255,255,0)'
+                pastSquares[parseInt(info[0]) - 3].classList.remove("movable");
+                pastSquares[parseInt(info[0]) - 3].classList.remove("up");
+            } catch (error) {}
+            try {
+                pastSquares[parseInt(info[0]) + 2].style.backgroundColor = 'rgba(255,255,255,0)'
+                pastSquares[parseInt(info[0]) + 2].classList.remove("movable");
+                pastSquares[parseInt(info[0]) + 2].classList.remove("right");
+            } catch (error) {}
+            try {
+                pastSquares[parseInt(info[0]) + 5].style.backgroundColor = 'rgba(255,255,255,0)'
+                pastSquares[parseInt(info[0]) + 5].classList.remove("movable");
+                pastSquares[parseInt(info[0]) + 5].classList.remove("down");
+            } catch (error) {}
+
+
+
+            try {
+                pastSquares[parseInt(info[0]) - 2].style.backgroundColor = 'rgba(255,255,255,0)'
+                pastSquares[parseInt(info[0]) - 2].classList.remove("movable");
+                pastSquares[parseInt(info[0]) - 2].classList.remove("left");
+            } catch (error) {}
+            try {
+                pastSquares[parseInt(info[0]) - 5].style.backgroundColor = 'rgba(255,255,255,0)'
+                pastSquares[parseInt(info[0]) - 5].classList.remove("movable");
+                pastSquares[parseInt(info[0]) - 5].classList.remove("up");
+            } catch (error) {}
+            try {
+                pastSquares[parseInt(info[0])].style.backgroundColor = 'rgba(255,255,255,0)'
+                pastSquares[parseInt(info[0])].classList.remove("movable");
+                pastSquares[parseInt(info[0])].classList.remove("right");
+            } catch (error) {}
+            try {
+                pastSquares[parseInt(info[0]) + 3].style.backgroundColor = 'rgba(255,255,255,0)'
+                pastSquares[parseInt(info[0]) + 3].classList.remove("movable");
+                pastSquares[parseInt(info[0]) + 3].classList.remove("down");
+            } catch (error) {}
+
+
+
+            try {
+                pastSquares[parseInt(info[0]) - 5].style.backgroundColor = 'rgba(255,255,255,0)'
+                pastSquares[parseInt(info[0]) - 5].classList.remove("movable");
+                pastSquares[parseInt(info[0]) - 5].classList.remove("left");
+            } catch (error) {}
+            try {
+                pastSquares[parseInt(info[0]) - 8].style.backgroundColor = 'rgba(255,255,255,0)'
+                pastSquares[parseInt(info[0]) - 8].classList.remove("movable");
+                pastSquares[parseInt(info[0]) - 8].classList.remove("up");
+            } catch (error) {}
+            try {
+                pastSquares[parseInt(info[0]) - 3].style.backgroundColor = 'rgba(255,255,255,0)'
+                pastSquares[parseInt(info[0]) - 3].classList.remove("movable");
+                pastSquares[parseInt(info[0]) - 3].classList.remove("right");
+            } catch (error) {}
+            try {
+                pastSquares[parseInt(info[0])].style.backgroundColor = 'rgba(255,255,255,0)'
+                pastSquares[parseInt(info[0])].classList.remove("movable");
+                pastSquares[parseInt(info[0])].classList.remove("down");
+            } catch (error) {}
+            
+
+            if(turn == false){
+                color = 'rgba(90, 34, 230)'
+                turn = true
+                player = 'p1'
+            }else {
+                color = 'rgba(44, 184, 112)'
+                turn = false
+                player = 'p2'
+            }
+
+            pastSquares[parseInt(info[0])].style.backgroundColor = color
+            pastSquares[parseInt(info[0])].classList.add(player);
+
+            
+
+            console.log(turn)
+
+            try{
+                pastSquares[parseInt(info[0]) + 4].classList.remove(player);
+                pastSquares[parseInt(info[0]) + 4].style.backgroundColor = 'rgba(255,255,255,0)'
+            }catch(error){}
+
+            try{
+                pastSquares[parseInt(info[0]) + 1].classList.remove(player);
+                pastSquares[parseInt(info[0]) + 1].style.backgroundColor = 'rgba(255,255,255,0)'
+            }catch(error){}
+            try{
+                pastSquares[parseInt(info[0]) - 1].classList.remove(player);
+                pastSquares[parseInt(info[0]) - 1].style.backgroundColor = 'rgba(255,255,255,0)'
+            }catch(error){}
+            try{
+                pastSquares[parseInt(info[0]) - 4].classList.remove(player);
+                pastSquares[parseInt(info[0]) - 4].style.backgroundColor = 'rgba(255,255,255,0)'
+            }catch(error){}
+
+
+            
             console.log('a')
             move = false
             isSelected = false
+
+            
         }
 
         
     }
+
+    function clickedPresent(){}
+    function clickedFuture(){}
 
 
 })

@@ -3,9 +3,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
     const grid2 = document.querySelector('.present')
     const grid3 = document.querySelector('.future')
     const width = 4
-    const pastSquares = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2]
-    const presentSquares = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2]
-    const futureSquares = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2]
+    const pastSquares = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    const presentSquares = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    const futureSquares = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 
     function createBoard(time){
         let color = true
@@ -54,29 +54,48 @@ document.addEventListener('DOMContentLoaded', ()=>{
     isSelected = false
     var pos1 = 0
     let pos2 = 15
-    let player = 'p1'
+    let player
 
 
     function clickedPast(){
+
         id = this.id.split(' ')
         if(isSelected){
             if(this.classList.contains('movable')){
                 for(i=0;i<15;i++){
-                    pastSquares[i].classList.remove(player)
+
                     pastSquares[i].classList.remove("movable")
-                    pastSquares[i].classList.add("tile")
+                    if(pastSquares[i].classList.contains('p1') || pastSquares[i].classList.contains('p2')){
+                        if(pastSquares[i].classList.contains('last')){
+                            pastSquares[i].classList.remove('last');
+                            pastSquares[i].classList.remove(player);
+                        }
+                    }else{
+                        pastSquares[i].classList.add("tile")
+                    }
+
                 }
+                
+
                 this.classList.add(player)
                 this.classList.remove('tile')
-                pos1 = id[0]
+
             }
             isSelected = false  
             for(i=0;i<15;i++){
                 pastSquares[i].classList.remove("movable")
             }
         }else{
+            
+            this.classList.add('last')
+            if(this.classList.contains("p1")){
+                player = 'p1'
+            }else if(this.classList.contains("p2")){
+                player = 'p2'
+            }
             isSelected = true
-            if(id[0] == pos1){
+            let a = 1
+            if(a == 1){
                     try {
                         pastSquares[parseInt(id[0])+1].classList.add('movable')
                     } catch (error) {}
@@ -91,7 +110,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
                     try {
                         pastSquares[parseInt(id[0])-4].classList.add('movable')
                     } catch (error) {}
-
                 }else if(id[0] == pos2){
                     try {
                         pastSquares[parseInt(id[0])+1].classList.add('movable')
@@ -109,6 +127,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
                     } catch (error) {}
             }
         }
+        console.log(player)
     }
     function clickedPresent(){}
     function clickedFuture(){}
